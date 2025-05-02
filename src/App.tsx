@@ -57,8 +57,9 @@ function App() {
   const [trailLifetime, setTrailLifetime] = useState(2000); // trail lifetime in ms
   const [trailDensity, setTrailDensity] = useState(3); // points captured per second
   const lastTrailCapture = useRef<number>(0);
-  const [pulseEffect, setPulseEffect] = useState(true);
-  const [collisionEffects, setCollisionEffects] = useState(true);
+  // Pulse and collision effects are always enabled, so we remove the checkboxes and set them to true
+  const [pulseEffect] = useState(true);
+  const [collisionEffects] = useState(true);
   const [boundaryBehavior, setBoundaryBehavior] = useState<BoundaryBehavior>("none");
   const [stats, setStats] = useState<SimulationStats>({
     totalMass: 0,
@@ -791,27 +792,7 @@ function App() {
             </>
           )}
 
-          <div className="flex items-center gap-2">
-            <label htmlFor="pulse">Pulse:</label>
-            <input
-              id="pulse"
-              type="checkbox"
-              checked={pulseEffect}
-              onChange={(e) => setPulseEffect(e.target.checked)}
-              className="w-4 h-4"
-            />
-          </div>
-
-          <div className="flex items-center gap-2">
-            <label htmlFor="collisionEffects">Bursts:</label>
-            <input
-              id="collisionEffects"
-              type="checkbox"
-              checked={collisionEffects}
-              onChange={(e) => setCollisionEffects(e.target.checked)}
-              className="w-4 h-4"
-            />
-          </div>
+          {/* Pulse and Bursts checkboxes removed, features always enabled */}
         </div>
 
         <div className="flex flex-wrap gap-2">
@@ -819,7 +800,7 @@ function App() {
             className="bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded"
             onClick={createRandomPoint}
           >
-            Add Point
+            Add Gravity Point
           </button>
           <button
             className="bg-red-600 hover:bg-red-700 px-3 py-1 rounded"
@@ -849,7 +830,7 @@ function App() {
           Use the mass slider to adjust the mass of new points. Choose boundary behavior: none (points can go off-screen), wrap (points wrap around edges), or bounce (points bounce off edges).
         </p>
         <p>
-          Visual effects: Enable trails to see particle paths (adjust density and lifetime), pulse for size oscillation, and bursts for collision explosions.
+          Visual effects: Enable trails to see particle paths (adjust density and lifetime). Pulse and bursts are always enabled for enhanced visuals.
         </p>
       </div>
     </div>
